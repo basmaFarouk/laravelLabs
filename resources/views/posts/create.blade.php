@@ -7,24 +7,18 @@
 </head>
 <body>
 
-<form action="/store" method="post">
+<form action="/posts" method="post">
     @csrf
-  <div class="mb-3">
-  <label class="form-label">ID</label>
-    <input type="text" class="form-control" name="id">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Name</label>
-    <input type="text" class="form-control"  name="name">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Body</label>
-    <input type="text" class="form-control" name="body">
-  </div>
+
   <div class="mb-3">
     <label class="form-label">Title</label>
-    <input type="text" class="form-control" name="title">
+    <input type="text" class="form-control"  name="title">
   </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input type="text" class="form-control" name="description">
+  </div>
+
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

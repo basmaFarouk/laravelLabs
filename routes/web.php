@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; //name space
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,60 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+
+Route::resource('posts',PostController::class);
+
+/*Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts',function(){
-    $posts=[
-        ["id"=>1,
-        "name"=>"Basma",
-        "body"=>"hi every one",
-        "title"=>"title basma"],
-        ["id"=>2,
-        "name"=>"Basma",
-        "body"=>"hi every one",
-        "title"=>"title basma"],
-        ["id"=>3,
-        "name"=>"Basma",
-        "body"=>"hi every one",
-        "title"=>"title basma"],
-        ["id"=>4,
-        "name"=>"Basma",
-        "body"=>"hi every one",
-        "title"=>"title basma"]
+Route::get('/posts',[PostController::class,"index"])->name('posts');
 
-    ];
-    return view("posts.index",["posts"=>$posts]);
+Route::get('/posts/{id}',[PostController::class,"show"]);
 
-});
-
-Route::get('/show/{id}', function($id){
-    $post=  ["id"=>$id,
-    "name"=>"Basma",
-    "body"=>"hi every one",
-    "title"=>"title basma"];
-    return view('posts.show', $post);
-})->where('id','[0-9]+');
+Route::get('/posts/{id}/edit',[PostController::class,"edit"])->name('posts.edit');
 
 
-Route::get("/edit/{id}",function($id){
-    $post=  ["id"=>$id,
-    "name"=>"Basma",
-    "body"=>"hi every one",
-    "title"=>"title basma"];
-    return view('posts.edit', $post);
-});
+Route::post("/posts/{id}",[PostController::class,"update"]);
 
-Route::post("update",function(){
-    return "Updated";
-});
+Route::get("/posts/create",[PostController::class,"create"]);
 
-Route::get("/create",function(){
-    return view("posts.create");
-
-});
-
-Route::post("/store",function(){
-    return "Added";
-});
+Route::post("/posts/{id}",[PostController::class,"destroy"]);
+Route::post("/posts",[PostController::class,"store"]);*/
