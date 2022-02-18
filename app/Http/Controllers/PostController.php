@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -16,6 +17,7 @@ class PostController extends Controller
     {
         //select * from posts
         $posts=Post::all();
+        //$post->user->name;
         // return $posts;
         return view("posts.index",["posts"=>$posts]);
     }
@@ -37,15 +39,27 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) //request hold all the information from the form
+    public function store(StorePostRequest $request) //request hold all the information from the form
     {
         //$data=$request->all();
         //return $data;
-        Post::create([
+        /*Post::create([
             //name in database -> name in html from request
             "title"=>$request->title,
-            "description"=>$request->description
-        ]);
+            "description"=>$request->description,
+            "user_id"=>1
+        ]);*/
+
+        //validate([roles],[msg])
+        // $request->validate([
+        //     'title'=>'required|min:3',
+        //     'description'=>'required'
+        // ]);
+        $post= new Post;
+        $post->title=$request->title;
+        $post->description=$request->description;
+        $post->user_id=2;
+        $post->save();
         return redirect()->route('posts.index');
     }
 
@@ -85,8 +99,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
+
+
         $post=Post::find($id);
         $post->title=$request->title;
         $post->description=$request->description;

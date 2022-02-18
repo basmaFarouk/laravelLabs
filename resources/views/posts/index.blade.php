@@ -10,6 +10,8 @@
     <table class="table">
         <tr>
             <th>ID</th>
+            <th>User Name</th>
+            <th>Email</th>
             <th>Title</th>
             <th>description</th>
             <th>Created at</th>
@@ -17,6 +19,8 @@
     @foreach ($posts as $post)
     <tr>
         <td>{{$post->id}}</td>
+        <td>{{$post->user->name}}</td>
+        <td>{{$post->user->email}}</td>
         <td>{{$post['title']}}</td>
         <td>{{$post['description']}}</td>
         <td>{{$post['created_at']}}</td>

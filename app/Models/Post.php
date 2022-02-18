@@ -10,4 +10,9 @@ class Post extends Model
     use HasFactory;
     protected $fillable=["title","description"];
     //protected $hidden=["createa_at"];
+
+    //every post belongs to one user
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

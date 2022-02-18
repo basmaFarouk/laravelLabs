@@ -7,31 +7,25 @@
 </head>
 <body>
 
-<form action="/posts" method="post">
+<form action="/users" method="post">
     @csrf
 
   <div class="mb-3">
-    <label class="form-label">Title</label>
-    <input type="text" class="form-control"  name="title" value="{{old('title')}}">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control"  name="name">
   </div>
   <div class="mb-3">
-    <label class="form-label">Description</label>
-    <input type="text" class="form-control" name="description" value="{{old('description')}}">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" class="form-control" name="password">
   </div>
 
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
-@if($errors->any())
-<div class="alert alert-danger">
-  <ul>
-  @foreach($errors->all() as $error)
-    <li> {{$error}} </li>
-  @endforeach
-</ul>
-</div>
-@endif
 
 </body>
 </html>
