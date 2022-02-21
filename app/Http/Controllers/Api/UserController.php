@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\User; //use name space
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -14,7 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        //هاخد كل داتا اليوزر من الكنترولر واوديها للريسورس عشان اظبطها
+        $users=User::all();
+        return UserResource::collection($users);
     }
 
     /**
@@ -24,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //return view("users.create");
+        //
     }
 
     /**
@@ -35,11 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user= new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=$request->password;
-        $user->save();
+        //
     }
 
     /**
@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return new UserResource(User::find($id));
     }
 
     /**

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
+use App\Models\Post; //use the name space of the model
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Http\Resources\PostResource; //use name space
 
-class UserController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        $posts=Post::all();
+        return PostResource::collection($posts);
     }
 
     /**
@@ -24,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //return view("users.create");
+        //
     }
 
     /**
@@ -35,11 +38,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user= new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=$request->password;
-        $user->save();
+        //dd($request);
+        $post= new Post;
+        //name in database -> name in html from request
+        $post->title=$request->title;
+        $post->description=$request->description;
+        $post->user_id=2;
+        $post->save();
+        return 'post stored';
     }
 
     /**
@@ -50,7 +56,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $post= Post::find($id);
+        if($post)
+        return new PostResource($post);
+        else 
+        return 'not found';
     }
 
     /**
@@ -73,7 +83,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post=Post::find($id);
+        $post->title=$request->title;
+        $post->description=$request->description;
+        $post->save();
+        return 'post updated';
     }
 
     /**
@@ -84,6 +98,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Post::destroy($id);
     }
 }
